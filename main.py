@@ -100,4 +100,4 @@ if __name__ == "__main__":
     # 依據上面寫入的檔案，取得前N斷詞
     get_trends()
 
-    # print(Get_Panda.get_emotion("今天做到一台RAV4計程車，感覺車內空間很小，而且很髒亂，作起來很不舒服，爛透了"))
+    print(Get_Panda.get_emotion("今天做到一台RAV4計程車，感覺車內空間很小，而且很髒亂，作起來很不舒服，爛透了"))
