@@ -1,5 +1,6 @@
 from selenium import webdriver
 from datetime import datetime
+import time
 
 
 def main(board_array_string, start_date, end_date):
@@ -15,7 +16,7 @@ def main(board_array_string, start_date, end_date):
     # 開始取得每個版的index值
     for i in range(0, len(board_array)):
         driver.get("https://www.ptt.cc/bbs/" + board_array[i] + "/index.html")
-        if board_array[i].upper() == "GOSSIP":
+        if board_array[i].upper() == "GOSSIPING":
             driver.find_element_by_class_name("over18-button-container").find_element_by_class_name("btn-big").click()
         element = driver.find_element_by_id("action-bar-container").find_element_by_class_name("btn-group-paging") \
             .find_element_by_link_text("‹ 上頁").get_property("href")
@@ -61,12 +62,10 @@ def main(board_array_string, start_date, end_date):
             # 爬每個文章日期後，比對開始和結束日期、定義
             for j in range(0, len(date_array)):
 
-                # 如果不是第一次執行
-                if 'trends_month' in locals():
-                    # 且上一次執行的文章月份，和這一次文章的月份，相減小於0，把年份-1，因為進入各版文章列表所顯示的日期，只有月和日沒有年份
-                    # trends_month != 0 的用意是reset每個版計算方式
-                    if (trends_month - datetime.strptime(date_array[j].text, "%m/%d").month < 0) & (trends_month != 0):
-                        trends_year = str(int(trends_year) - 1)
+                # 且上一次執行的文章月份，和這一次文章的月份，相減小於0，把年份-1，因為進入各版文章列表所顯示的日期，只有月和日沒有年份
+                # trends_month != 0 的用意是reset每個版計算方式
+                if (trends_month - datetime.strptime(date_array[j].text, "%m/%d").month < 0) & (trends_month != 0):
+                    trends_year = str(int(trends_year) - 1)
 
                 # 將文章時間加讓年份，並且計算這篇文章和啟示日期的差距
                 trends_datetime = datetime.strptime(trends_year + "/" + date_array[j].text, "%Y/%m/%d")
@@ -106,8 +105,8 @@ def main(board_array_string, start_date, end_date):
                     # print(int(datetime_gap.days/1.5))
                     board_start_date_index = board_start_date_index + int(datetime_gap.days / 1.5)
 
-        # 關閉動態網頁
-        driver.close()
+    # 關閉動態網頁
+    driver.close()
     # 全部都找到後，開始找內容
     start_index_array_string = start_index_array_string[:-1]
     end_index_array_string = end_index_array_string[:-1]

@@ -6,7 +6,7 @@ import Get_Index
 import pathlib
 import Get_jieba
 import Get_Content
-import Get_Panda
+import Get_Emotion
 
 from datetime import datetime
 
@@ -15,7 +15,7 @@ start_date = "2021/05/12"
 end_date = "2021/05/12"
 execute_time = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
 file_path = str(pathlib.Path(__file__).parent.absolute()) + "/file/" + board + "/" + execute_time + "/"
-# file_path = str(pathlib.Path(__file__).parent.absolute()) + "/file/" + board + "/2021_05_12_17_38_06/"
+# file_path = str(pathlib.Path(__file__).parent.absolute()) + "/file/" + board + "/2021_05_16_13_40_00/"
 filename = file_path + "Full_Data, Board-" + board + ", From-" + start_date.replace("/", "_") + "~" + \
            end_date.replace("/", "_") + ", AT-" + execute_time + ".txt"
 
@@ -28,7 +28,6 @@ def get_trends():
     alias_name_file_name = "jieba_dictionary/alias_name.txt"
     dictionary_file_name = "jieba_dictionary/Car_Type.txt," \
                            "jieba_dictionary/Car_Component.txt"
-
     # 取得所有生成的文章、推文的檔案
     for j in range(0, len(dictionary_file_name.split(","))):
         all_file_name = [f for f in listdir(file_path) if isfile(join(file_path, f))]
@@ -78,6 +77,7 @@ def get_trends():
                         total_trends_list[trends_word] += + reply_trends_list[trends_word]
                     else:
                         total_trends_list[trends_word] = reply_trends_list[trends_word]
+
         # 將每篇文章的斷詞 加權後的權重(包含推文)，排序前N個，取得看板在這段起訖時間內，發文聲量最高的前N名
         total_post_trends_list = list(total_trends_list.items())
         total_post_trends_list.sort(key=lambda x: x[1], reverse=True)
@@ -90,6 +90,37 @@ def get_trends():
             print(str(i + 1) + ":" + total_post_trends_list[i][0], total_post_trends_list[i][1])
 
 
+def get_emotion():
+    all_file_name = [f for f in listdir(file_path) if isfile(join(file_path, f))]
+    total_trends_list = {}
+    for i in range(1, len(all_file_name)):
+
+        # 這篇文章的關鍵字斷詞排名
+        post_trends_list = {}
+
+        # 這篇文章下方推文的關鍵字斷詞排名
+        reply_trends_list = []
+
+        # 如果是文章內容，取得文章前N個加權斷詞
+        if all_file_name[i].find("Content") > -1:
+            post_trends_list = Get_jieba.main(file_path + all_file_name[i]
+                                              , "jieba_dictionary/idf_Car.txt", "jieba_dictionary/stop.txt",
+                                              "jieba_dictionary/Car.txt", 5, "jieba_dictionary/alias_name.txt")
+            if os.path.isfile(file_path + all_file_name[i].replace("Content", "Reply")):
+                file = open(file_path + all_file_name[i].replace("Content", "Reply"), "r", encoding="utf-8")
+                text = file.readlines()
+                for j in range(0, len(text)):
+                    reply_trends_list.append(text[j].strip())
+
+            if len(reply_trends_list) > 0:
+                emotion = Get_Emotion.main(reply_trends_list)
+                for index, result in enumerate(emotion):
+                    Get_Content.print_to_file(file_path + all_file_name[i].replace("Content", "Reply_Emotion"),
+                                              'text: {},    predict: {}, positive_probs:{}'.format(emotion[index]['text']
+                                                                                    , emotion[index]['sentiment_key']
+                                                                                    , emotion[index]['positive_probs']))
+
+
 if __name__ == "__main__":
     # 取得起始、結束index
     start_index_array_string, end_index_array_string = Get_Index.main(board, start_date, end_date)
@@ -100,4 +131,5 @@ if __name__ == "__main__":
     # 依據上面寫入的檔案，取得前N斷詞
     get_trends()
 
-    print(Get_Panda.get_emotion("今天做到一台RAV4計程車，感覺車內空間很小，而且很髒亂，作起來很不舒服，爛透了"))
+    # 依據上面寫入的檔案，取得每一篇文章前五個斷詞，和下方推文的情緒
+    get_emotion()
