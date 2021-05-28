@@ -1,6 +1,7 @@
 # Crawler_ptt_trends
 
 This is a crawler which can go through select ptt board(multi-selection) in selected time interval.
+By using selenium to get currect index of ptt board and Beautiful soup get page content.
 Save these Post content and reply to file
 
 After setting jieba cut idf weight and dictionary (multi-selection).
