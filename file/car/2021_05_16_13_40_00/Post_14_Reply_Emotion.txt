@@ -1,0 +1,16 @@
+TEXT: 有回原廠問過嗎？原廠應該還有庫存？個人經驗三菱原廠其實沒有比外面貴多少,    PREDICT: NEGATIVE, POSITIVE_PROBS:0.061
+TEXT: 有，問過南港匯豐。也是整新的，工廠停產了。甚至引擎腳某一隻已經斷料了。超前部署問看看外廠還有沒有門路，謝謝您的回覆喔！,    PREDICT: NEGATIVE, POSITIVE_PROBS:0.0879
+TEXT: 三菱原廠老車料真的比較好叫，甚至可以幫忙日訂可以去原廠問問看，我的1997廢鐵也很多料要原廠拿,    PREDICT: POSITIVE, POSITIVE_PROBS:0.966
+TEXT: 技師的說法是工廠沒做新的了,    PREDICT: POSITIVE, POSITIVE_PROBS:0.6863
+TEXT: 外廠技術問的是材料行，材料行不見得說的是正確的,    PREDICT: NEGATIVE, POSITIVE_PROBS:0.4423
+TEXT: 請問F大也是問匯豐嗎？,    PREDICT: NEGATIVE, POSITIVE_PROBS:0.0657
+TEXT: 我的引擎腳也是原廠才拿的到，外廠拿的根本不是日本製，有些東西原廠是台灣原廠、大陸原廠開去原廠填資料調零件，三菱原廠老車零件算服務好,    PREDICT: NEGATIVE, POSITIVE_PROBS:0.4359
+TEXT: 匯豐跟順益目前叫料系統有差，順益比較好叫老件,    PREDICT: NEGATIVE, POSITIVE_PROBS:0.0681
+TEXT: 抱歉，看了推文，你在南港匯豐問了沒料....你可以順益問問看,    PREDICT: NEGATIVE, POSITIVE_PROBS:0.1344
+TEXT: 感謝資訊！,    PREDICT: POSITIVE, POSITIVE_PROBS:0.881
+TEXT: 有些整新品也還不錯，如果只是襯套換橡膠老車很多東西都可以用整新品、殺肉品,    PREDICT: POSITIVE, POSITIVE_PROBS:0.7925
+TEXT: 推,    PREDICT: POSITIVE, POSITIVE_PROBS:0.7341
+TEXT: 再去跟順益問看看，如果這次要換就是換一整套了（或是一整台？！）有機會再和版友分享，再次感謝！,    PREDICT: POSITIVE, POSITIVE_PROBS:0.9642
+TEXT: 副場找一找就好了啦,    PREDICT: POSITIVE, POSITIVE_PROBS:0.5452
+TEXT: 05年車很老了，即使里程低，要修會越來越難考慮換新LANCER阿XD,    PREDICT: POSITIVE, POSITIVE_PROBS:0.6626
+TEXT: 嗯嗯，下一篇文如果不是整理記錄，就是開箱文了XD,    PREDICT: NEGATIVE, POSITIVE_PROBS:0.454

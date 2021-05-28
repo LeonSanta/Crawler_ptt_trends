@@ -113,7 +113,9 @@ def get_emotion():
                     reply_trends_list.append(text[j].strip())
 
             if len(reply_trends_list) > 0:
+                Get_Content.print_to_file(file_path + all_file_name[i].replace("Content", "Reply_Emotion"), post_trends_list)
                 emotion = Get_Emotion.main(reply_trends_list)
+
                 for index, result in enumerate(emotion):
                     Get_Content.print_to_file(file_path + all_file_name[i].replace("Content", "Reply_Emotion"),
                                               'text: {},    predict: {}, positive_probs:{}'.format(emotion[index]['text']
