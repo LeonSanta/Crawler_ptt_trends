@@ -3,7 +3,7 @@
 This is a crawler which can go through select ptt board(multi-selection) in selected time interval.
 Save these Post content and reply to file
 
-After setting jieba cut idf weight and dictionary (dictionary could be multi-selection).
+After setting jieba cut idf weight and dictionary (multi-selection).
 Crawler_ptt_trends can using these file to do the function below ：
   1. Calculate top n trends key word of these ptt board in selected time interval.
   2. Get each post content's keyword.
